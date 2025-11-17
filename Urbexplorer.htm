@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog de exploración urbana (urbex) - Descubre lugares abandonados y su historia">
+    <meta name="keywords" content="urbex, exploración urbana, lugares abandonados, fotografía urbana, edificios abandonados">
+    <meta name="author" content="Urbex Explorers">
+    <title>Urbex Explorers - Blog de Exploración Urbana</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏚️</text></svg>">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --gradient-primary: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            --gradient-accent: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-medium: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .dark-mode {
+            --primary-color: #121212;
+            --secondary-color: #1e1e1e;
+            --accent-color: #bb86fc;
+            --light-color: #121212;
+            --dark-color: #f5f5f5;
+            --text-light: #121212;
+            --text-dark: #f5f5f5;
+            --gradient-primary: linear-gradient(135deg, #121212 0%, #2d2d2d 100%);
+            --gradient-accent: linear-gradient(135deg, #bb86fc 0%, #9b59b6 100%);
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--light-color);
+            transition: all 0.4s ease;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        /* Navbar Styling */
+        .navbar {
+            background: var(--gradient-primary) !important;
+            box-shadow: var(--shadow-soft);
+            padding: 15px 0;
+            transition: all 0.4s ease;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand span {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        .nav-link {
+            font-weight: 500;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-primary), url('https://www.urbex-travel.com/wp-content/uploads/2023/06/BezNazwy_Panorama-1-kopia.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(44, 62, 80, 0.4) 0%, rgba(44, 62, 80, 0.8) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .btn-hero {
+            background: var(--gradient-accent);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .btn-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        .btn-hero:hover::before {
+            left: 100%;
+        }
+        /* Cards Styling */
+        .card-urbex {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            background-color: var(--light-color);
+            height: 100%;
+        }
+        .card-urbex:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            loading: lazy; /* Mejora: lazy loading para imágenes */
+        }
+        .card-urbex:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+        .card-text {
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        /* Section Styling */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--text-dark);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Carousel Styling */
+        .carousel-urbex {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+            loading: lazy; /* Mejora: lazy loading para carrusel */
+            transition: transform 0.5s ease; /* Mejora: transición suave en carrusel */
+        }
+        .carousel-item.active img {
+            transform: scale(1.05); /* Mejora: zoom sutil en slide activo */
+        }
+        .carousel-caption {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 20px;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            transition: opacity 0.5s ease;
+        }
+        /* Google Maps Section */
+        .maps-section {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .maps-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .map-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            loading: lazy; /* Mejora: lazy loading para iframe de mapa */
+        }
+        .map-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .map-thumbnail {
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+        .map-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-medium);
+        }
+        .map-thumbnail img {
+            width: 100%;
+            height: auto;
+            loading: lazy;
+        }
+        /* YouTube Video Section */
+        .video-section {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .video-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            loading: lazy; /* Mejora: lazy loading para iframe de YouTube */
+        }
+        .video-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        /* List Styling */
+        .list-urbex {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+        .list-group-item {
+            border: none;
+            padding: 15px 20px;
+            background-color: var(--light-color);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .list-group-item:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        .list-group-item:last-child {
+            border-bottom: none;
+        }
+        /* Footer Styling */
+        .footer-urbex {
+            background: var(--gradient-primary);
+            color: var(--text-light);
+            padding: 60px 0 30px;
+        }
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .footer-links h5 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+        }
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        .footer-links ul li a {
+            color: var(--text-light);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .footer-links ul li a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        .social-icons a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        /* Dark Mode Toggle */
+        #darkModeToggle {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #darkModeToggle:hover {
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+        }
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-medium);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+        /* Utility Classes */
+        .gradient-text {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .bg-section {
+            background-color: var(--light-color);
+            position: relative;
+        }
+        .bg-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e74c3c' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: -1;
+        }
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        .modal-body img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            loading: lazy; /* Mejora: lazy loading en modales */
+        }
+        /* Mejora: Estilos adicionales para miniaturas */
+        .thumbnail-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .thumbnail-grid img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .thumbnail-grid img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span>🏚️</span>
+                Urbex <span class="gradient-text">Explorers</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="articles.html">Exploraciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="links.html">Enlaces</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="darkModeToggle">
+                            <i class="bi bi-moon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Sección principal -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6 hero-content fade-in">
+                    <h1 class="hero-title">Descubre lo <span class="gradient-text">Invisible</span></h1>
+                    <p class="hero-subtitle">Sumérgete en la belleza oculta de lugares abandonados y revive historias olvidadas a través de la exploración urbana.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#explorations" class="btn btn-hero">Ver Exploraciones</a>
+                        <a href="#about" class="btn btn-outline-light">Saber Más</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Carrusel con 3 imágenes -->
+                    <div id="heroCarousel" class="carousel slide carousel-urbex" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://media.cnn.com/api/v1/images/stellar/prod/140205103437-abandoned-chris-dolan-2.jpg?q=w_1200,h_800,x_0,y_0,c_fill/h_447" class="d-block w-100" alt="Fábrica abandonada">
+                                <div class="carousel-caption">
+                                    <h5>Fábrica Textil Abandonada</h5>
+                                    <p>Exploración de una antigua fábrica textil de los años 50</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://i.pinimg.com/736x/4a/58/e8/4a58e818b8f1c29e24e3babbbdccd18d.jpg" class="d-block w-100" alt="Hospital abandonado">
+                                <div class="carousel-caption">
+                                    <h5>Hospital Psiquiátrico</h5>
+                                    <p>Recorrido por las instalaciones de un antiguo hospital mental</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.shutterstock.com/image-photo/derelict-aberdeen-historic-woolmanhill-hospital-600nw-2593016633.jpg" class="d-block w-100" alt="Mansión abandonada">
+                                <div class="carousel-caption">
+                                    <h5>Mansión de la Época Victoriana</h5>
+                                    <p>Descubriendo los secretos de una lujosa mansión abandonada</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Sección Acerca de -->
+    <section id="about" class="py-5 bg-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title">Sobre el <span class="gradient-text">Urbex</span></h2>
+                    <p class="lead">La exploración urbana, o urbex, es el arte de descubrir y documentar lugares abandonados u olvidados por el tiempo.</p>
+                    <p>Nuestro blog está dedicado a compartir estas experiencias, mostrando la belleza melancólica de estructuras que una vez fueron vibrantes y llenas de vida.</p>
+                    <p>Cada exploración es una ventana al pasado, una oportunidad para conectar con historias que merecen ser recordadas.</p>
+                    <a href="#explorations" class="btn btn-hero mt-3">Nuestras Exploraciones</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <img src="https://static01.nyt.com/images/2020/07/20/multimedia/00xp-abandoned1/00xp-abandoned1-videoSixteenByNineJumbo1600.jpg" alt="Interior abandonado" class="img-fluid rounded shadow" loading="lazy">
+                        </div>
+                        <div class="col-6">
+                            <img src="https://media.istockphoto.com/id/1455589142/photo/interior-of-old-ruined-palace-with-columns-and-dome.jpg?s=612x612&w=0&k=20&c=XCrxcGlw5Za0NtNDf10MCVcm4F2WX5gbNxz61AnGV3A=" alt="Escalera abandonada" class="img-fluid rounded shadow" style="margin-top: 30px;" loading="lazy">
+                        </div>
+                        <div class="col-6">
+                            <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3502807415796291717" alt="Ventana rota" class="img-fluid rounded shadow" style="margin-top: -30px;" loading="lazy">
+                        </div>
+                        <div class="col-6">
+                            <img src="https://static.wixstatic.com/media/8f3694_1aa1c955e1084061b505f0414c6ac18f~mv2.jpg/v1/fill/w_568,h_378,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/8f3694_1aa1c955e1084061b505f0414c6ac18f~mv2.jpg" alt="Pasillo abandonado" class="img-fluid rounded shadow" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sección de Exploraciones Destacadas -->
+    <section id="explorations" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Exploraciones <span class="gradient-text">Destacadas</span></h2>
+            <p class="text-center mb-5">Algunos de nuestros descubrimientos más fascinantes</p>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card card-urbex">
+                        <div class="position-relative">
+                            <img src="https://media.istockphoto.com/id/117145966/photo/abandoned-old-ruined-factory-urban-exploration.jpg?s=612x612&w=0&k=20&c=b4qnEgVE7KTENKNMCgCziTmxgmFWSaABGbH-9XIRpCU=" class="card-img-top" alt="Mansión abandonada" loading="lazy">
+                            <span class="card-badge">Nuevo</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">La Mansión de los Espejos</h5>
+                            <p class="card-text">Una exploración nocturna de una mansión victoriana con una colección intacta de espejos antiguos.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#mansionModal">Leer más</button>
+                                <small class="text-muted">Hace 3 días</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-urbex">
+                        <div class="position-relative">
+                            <img src="https://ychef.files.bbci.co.uk/1280x720/p0jgrvnw.jpg" class="card-img-top" alt="Fábrica textil" loading="lazy">
+                            <span class="card-badge">Popular</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Fábrica de Hilados Olvidada</h5>
+                            <p class="card-text">Descubrimos los restos de una próspera fábrica textil que cerró abruptamente en los años 80.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#fabricaModal">Leer más</button>
+                                <small class="text-muted">Hace 2 semanas</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card card-urbex">
+                        <div class="position-relative">
+                            <img src="https://static01.nyt.com/images/2024/03/22/multimedia/22sp-hkbasel-exploration-inyt-01-mlcb/22sp-hkbasel-exploration-inyt-01-mlcb-articleLarge.jpg?quality=75&auto=webp&disable=upscale" class="card-img-top" alt="Estación de tren" loading="lazy">
+                            <span class="card-badge">Clásico</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Estación de Ferrocarril Fantasma</h5>
+                            <p class="card-text">Una estación subterránea abandonada que nunca llegó a ser inaugurada al público.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#estacionModal">Leer más</button>
+                                <small class="text-muted">Hace 1 mes</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mejora: Miniaturas para exploraciones -->
+            <div class="thumbnail-grid">
+                <img src="https://preview.redd.it/a-bunch-of-urbex-locations-in-the-north-east-v0-mhfoybjjt11g1.jpg?width=640&crop=smart&auto=webp&s=b7f0af59942a305dc01a626fbdef5c0258087e91" alt="Miniatura exploración 1" onclick="openModalImage(this.src)">
+                <img src="https://www.shutterstock.com/image-photo/old-broken-fountain-near-abandoned-600nw-2567636999.jpg" alt="Miniatura exploración 2" onclick="openModalImage(this.src)">
+                <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=10159707647366440" alt="Miniatura exploración 3" onclick="openModalImage(this.src)">
+            </div>
+        </div>
+    </section>
+    <!-- Sección de Google Maps -->
+    <section class="maps-section">
+        <div class="container">
+            <h2 class="map-title">Descubre tu próxima exploración</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425872426492!3d40.74076685738816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sEmpire%20State%20Building!5e0!3m2!1ses!2ses!4v1698765432100!5m2!1ses!2ses" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- Mejora: Miniaturas de mapas -->
+            <div class="thumbnail-grid">
+                <div class="map-thumbnail" onclick="changeMapLocation('40.748817,-73.985428')">
+                    <img src="https://i.insider.com/6478c6e930404300183a9a68?width=700" alt="Miniatura mapa 1">
+                </div>
+                <div class="map-thumbnail" onclick="changeMapLocation('51.507351,-0.127758')">
+                    <img src="https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/15839/production/_86212188_8697832101_f7b201479f_o.jpg" alt="Miniatura mapa 2">
+                </div>
+                <div class="map-thumbnail" onclick="changeMapLocation('48.856614,2.352221')">
+                    <img src="https://iso.500px.com/wp-content/uploads/2021/07/The-green-Atlantis-By-Thomas-Mueller-2.jpg" alt="Miniatura mapa 3">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sección de Video de YouTube -->
+    <section class="video-section">
+        <div class="container">
+            <h2 class="video-title">Los mejores videos de urbex noviembre 2025</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/iq5YDGWQ6l0" title="Los mejores videos de urbex noviembre 2025" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sección de Consejos -->
+    <section class="py-5 bg-section">
+        <div class="container">
+            <h2 class="section-title">Consejos para <span class="gradient-text">Exploradores</span></h2>
+            <p class="text-center mb-5">La seguridad es lo primero en cualquier exploración urbana</p>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h3 class="mb-4">Equipo Esencial</h3>
+                    <div class="list-urbex">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <i class="bi bi-brightness-high-fill me-2 text-warning"></i>
+                                Linterna potente y baterías de repuesto
+                            </div>
+                            <div class="list-group-item">
+                                <i class="bi bi-person-badge me-2 text-primary"></i>
+                                Calzado resistente y ropa adecuada
+                            </div>
+                            <div class="list-group-item">
+                                <i class="bi bi-hand-index-thumb me-2 text-info"></i>
+                                Guantes de protección
+                            </div>
+                            <div class="list-group-item">
+                                <i class="bi bi-airplane-engines me-2 text-secondary"></i>
+                                Mascarilla antipolvo
+                            </div>
+                            <div class="list-group-item">
+                                <i class="bi bi-heart-pulse me-2 text-danger"></i>
+                                Botiquín de primeros auxilios
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <h3 class="mb-4">Normas de Seguridad</h3>
+                    <div class="list-urbex">
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item">Nunca explores solo - siempre en grupo</li>
+                            <li class="list-group-item">Informa a alguien de tu ubicación y horario</li>
+                            <li class="list-group-item">Respeta el lugar - no destruyas ni robes</li>
+                            <li class="list-group-item">Ten cuidado con estructuras inestables</li>
+                            <li class="list-group-item">Respeta la propiedad privada</li>
+                            <li class="list-group-item">Lleva agua y snacks energéticos</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="py-5 bg-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="section-title">Contáct<span class="gradient-text">anos</span></h2>
+                    <p class="text-center mb-5">¿Tienes preguntas o quieres compartir tus exploraciones? ¡Escríbenos!</p>
+                    <div class="card shadow border-0">
+                        <div class="card-body p-5">
+                            <div class="row text-center">
+                                <div class="col-md-4 mb-4">
+                                    <div class="contact-option">
+                                        <i class="bi bi-envelope display-4 text-primary mb-3"></i>
+                                        <h4>Email Directo</h4>
+                                        <p>Envíanos un correo directamente</p>
+                                        <a href="mailto:info@urbexexplorers.com?subject=Consulta%20Urbex%20Explorers&body=Hola,%20me%20interesa%20contactar%20con%20ustedes." class="btn btn-primary mt-2">
+                                            <i class="bi bi-send me-2"></i> Enviar Email
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="contact-option">
+                                        <i class="bi bi-chat-dots display-4 text-primary mb-3"></i>
+                                        <h4>Formulario</h4>
+                                        <p>Completa nuestro formulario online</p>
+                                        <button class="btn btn-outline-primary mt-2" onclick="showContactForm()">
+                                            <i class="bi bi-pencil me-2"></i> Abrir Formulario
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="contact-option">
+                                        <i class="bi bi-telephone display-4 text-primary mb-3"></i>
+                                        <h4>Teléfono</h4>
+                                        <p>Llamanos directamente</p>
+                                        <a href="tel:+1234567890" class="btn btn-primary mt-2">
+                                            <i class="bi bi-telephone-outbound me-2"></i> Llamar Ahora
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Formulario de contacto oculto -->
+                            <form id="contactForm" class="mt-5" style="display: none;">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Asunto</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Mensaje</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-hero">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer-urbex">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo">
+                        <span>🏚️</span> Urbex <span class="gradient-text">Explorers</span>
+                    </div>
+                    <p>Explorando la belleza oculta de lugares abandonados desde 2015. Documentamos historias olvidadas y compartimos la fascinante estética de la decadencia urbana.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 footer-links">
+                    <h5>Exploraciones</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Hospitales</a></li>
+                        <li><a href="#">Fábricas</a></li>
+                        <li><a href="#">Mansiones</a></li>
+                        <li><a href="#">Escuelas</a></li>
+                        <li><a href="#">Estaciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 footer-links">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Guía de Seguridad</a></li>
+                        <li><a href="#">Equipo Recomendado</a></li>
+                        <li><a href="#">Leyes y Normativas</a></li>
+                        <li><a href="#">Fotografía Urbex</a></li>
+                        <li><a href="#">Comunidad</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 footer-links">
+                    <h5>Compañía</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Nuestro Equipo</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacidad</a></li>
+                        <li><a href="#">Términos</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 footer-links">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Política de Privacidad</a></li>
+                        <li><a href="#">Términos de Uso</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                        <li><a href="#">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Urbex Explorers. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Hecho con <i class="bi bi-heart-fill text-danger"></i> para exploradores urbanos</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Modal de Políticas de Privacidad -->
+    <div class="modal fade" id="privacyModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Política de Privacidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Información que recopilamos</h6>
+                    <p>Recopilamos información que nos proporcionas directamente cuando te registras en nuestro sitio, suscribes a nuestro newsletter o participas en nuestras actividades.</p>
+                    <h6>2. Uso de la información</h6>
+                    <p>Utilizamos la información para personalizar tu experiencia, mejorar nuestro sitio web, procesar transacciones y enviar correos periódicos.</p>
+                    <h6>3. Protección de la información</h6>
+                    <p>Implementamos una variedad de medidas de seguridad para mantener la seguridad de tu información personal.</p>
+                    <h6>4. Cookies</h6>
+                    <p>Utilizamos cookies para mejorar la experiencia del usuario y analizar el tráfico del sitio web.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Mansión de los Espejos -->
+    <div class="modal fade" id="mansionModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">La Mansión de los Espejos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://static.wixstatic.com/media/a0b74f_b5b8576809b5495d917676c9bd212d35~mv2.jpg/v1/fill/w_980,h_551,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a0b74f_b5b8576809b5495d917676c9bd212d35~mv2.jpg" alt="Mansión abandonada" loading="lazy">
+                    <h6>Historia del Lugar</h6>
+                    <p>Esta imponente mansión victoriana fue construida en 1898 por la familia Devereaux, una de las familias más acaudaladas de la región. La leyenda cuenta que la señora Devereaux era obsesiva con los espejos, llegando a coleccionar más de 200 piezas únicas de toda Europa.</p>
+                    <h6>Nuestra Exploración</h6>
+                    <p>Accedimos al lugar al atardecer, cuando la luz dorada del sol creaba reflejos fantasmales en los espejos cubiertos de polvo. La mansión conserva intactos la mayoría de sus muebles originales, aunque el paso del tiempo ha dejado su marca en forma de humedades y grietas.</p>
+                    <h6>Hallazgos Interesantes</h6>
+                    <ul>
+                        <li>Colección completa de espejos victorianos intactos</li>
+                        <li>Cartas personales de la familia en el estudio</li>
+                        <li>Reloj de péndulo que aún funciona</li>
+                        <li>Biblioteca con más de 3,000 volúmenes</li>
+                    </ul>
+                    <h6>Estado de Conservación</h6>
+                    <p>El edificio muestra signos de deterioro avanzado pero estructuralmente sólido. Se recomienda extremar precauciones en el ala este donde el piso presenta debilidades.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Fábrica de Hilados -->
+    <div class="modal fade" id="fabricaModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Fábrica de Hilados Olvidada</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://thumbs.dreamstime.com/b/abandoned-brick-building-overgrown-vegetation-overcast-sky-above-ruins-old-factory-wasteland-nature-reclaiming-industrial-385623971.jpg" alt="Fábrica textil" loading="lazy">
+                    <h6>Historia Industrial</h6>
+                    <p>La Fábrica de Hilados "La Industrial" operó desde 1925 hasta 1983, siendo en su momento la mayor productora de textiles de la región. En sus mejores tiempos empleaba a más de 800 trabajadores y exportaba a toda Europa.</p>
+                    <h6>Exploración Detallada</h6>
+                    <p>Nuestro equipo documentó tres plantas completas de maquinaria textil abandonada. Las telarañas cubren las máquinas como si el tiempo se hubiera detenido. Encontramos registros de producción hasta el último día de operaciones.</p>
+                    <h6>Elementos Preservados</h6>
+                    <ul>
+                        <li>Máquinas de hilado completamente intactas</li>
+                        <li>Archivos administrativos de 1925-1983</li>
+                        <li>Uniforme del personal en vestuarios</li>
+                        <li>Sistema de campanas de turnos</li>
+                    </ul>
+                    <h6>Condiciones Actuales</h6>
+                    <p>La estructura principal es sólida pero el techo presenta múltiples filtraciones. Se detectó presencia de amianto en algunas áreas, por lo que se requiere equipo de protección respiratoria.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Estación de Ferrocarril -->
+    <div class="modal fade" id="estacionModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Estación de Ferrocarril Fantasma</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://photos.on-this.website/wm/NM46Kpvv_65Xrf80qb_LFOhpGLo=/wbr/1565134865/15678_2631017494e13de54a5f63.jpg" alt="Estación de tren" loading="lazy">
+                    <h6>Historia del Proyecto Fallido</h6>
+                    <p>Esta estación subterránea fue parte del ambicioso "Proyecto Metrópolis" de 1978 que nunca llegó a completarse. Diseñada para conectar el centro histórico con los nuevos desarrollos residenciales, la estación estuvo lista al 95% cuando los fondos se agotaron.</p>
+                    <h6>Exploración Subterránea</h6>
+                    <p>Accedimos a través de un túnel de mantenimiento abandonado. La estación conserva todos sus elementos originales: taquillas, máquinas expendedoras de billetes (vacías), y señalización completa. El andén principal mide 150 metros de longitud.</p>
+                    <h6>Características Únicas</h6>
+                    <ul>
+                        <li>Arquitectura modernista de los años 70 intacta</li>
+                        <li>Sistema de ventilación aún operativo</li>
+                        <li>Mosaicos artísticos en perfecto estado</li>
+                        <li>Carteles de destino nunca utilizados</li>
+                    </ul>
+                    <h6>Consideraciones de Seguridad</h6>
+                    <p>Niveles normales de oxígeno pero presencia de humedad elevada. La iluminación natural es nula, requiriendo múltiples fuentes de luz. Se detectaron algunas filtraciones de agua en el túnel norte.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal genérico para imágenes ampliadas -->
+    <div class="modal fade" id="imageZoomModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Vista Ampliada</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="zoomedImage" src="" alt="Imagen ampliada" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Función para activar/desactivar el modo oscuro
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            // Cambiar icono
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            if (darkModeToggle) {
+                const darkModeIcon = darkModeToggle.querySelector('i');
+                if (isDarkMode) {
+                    darkModeIcon.classList.remove('bi-moon');
+                    darkModeIcon.classList.add('bi-sun');
+                } else {
+                    darkModeIcon.classList.remove('bi-sun');
+                    darkModeIcon.classList.add('bi-moon');
+                }
+            }
+        }
+        // Función para enviar email
+        function sendEmail() {
+            window.location.href = 'mailto:info@urbexexplorers.com?subject=Consulta%20Urbex%20Explorers&body=Hola,%20me%20interesa%20contactar%20con%20ustedes.';
+        }
+        // Función para abrir modal de políticas de privacidad
+        function openPrivacyModal() {
+            const privacyModal = new bootstrap.Modal(document.getElementById('privacyModal'));
+            privacyModal.show();
+        }
+        // Función para mostrar alerta personalizada
+        function showCustomAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 1060; min-width: 300px;';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+            // Auto cerrar después de 5 segundos
+            setTimeout(() => {
+                if (document.body.contains(alertDiv)) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+        // Función para inicializar efectos hover en tarjetas
+        function initCardHoverEffects() {
+            const cards = document.querySelectorAll('.card-urbex');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = 'var(--shadow-medium)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'var(--shadow-soft)';
+                });
+            });
+        }
+        // Función para inicializar efectos hover en botones
+        function initButtonHoverEffects() {
+            const buttons = document.querySelectorAll('.btn-hero, .btn-outline-primary');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        }
+        // Función para inicializar el carrusel
+        function initCarousel() {
+            const carousel = document.getElementById('heroCarousel');
+            if (carousel) {
+                // Configuración automática del carrusel
+                const carouselInstance = new bootstrap.Carousel(carousel, {
+                    interval: 5000,
+                    ride: 'carousel'
+                });
+            }
+        }
+        // Función para el botón "Volver arriba"
+        function initBackToTop() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (backToTopButton) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTopButton.classList.add('active');
+                    } else {
+                        backToTopButton.classList.remove('active');
+                    }
+                });
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        }
+        // Función para inicializar navegación suave
+        function initSmoothScroll() {
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+        }
+        // Función para inicializar contador de visitas
+        function initVisitCounter() {
+            let visitCount = localStorage.getItem('urbexVisitCount') || 0;
+            visitCount = parseInt(visitCount) + 1;
+            localStorage.setItem('urbexVisitCount', visitCount);
+            // Mostrar contador en consola (puedes mostrarlo en la página si quieres)
+            console.log(`Visitas a Urbex Explorers: ${visitCount}`);
+        }
+        // Función para cambiar texto del hero dinámicamente
+        function initDynamicHeroText() {
+            const heroText = document.querySelector('.hero-title');
+            if (heroText) {
+                const originalText = heroText.innerHTML;
+                const texts = [
+                    "Descubre lo <span class='gradient-text'>Invisible</span>",
+                    "Explora lo <span class='gradient-text'>Olvidado</span>",
+                    "Revive la <span class='gradient-text'>Historia</span>"
+                ];
+                let currentIndex = 0;
+                setInterval(() => {
+                    currentIndex = (currentIndex + 1) % texts.length;
+                    heroText.style.opacity = 0;
+                    setTimeout(() => {
+                        heroText.innerHTML = texts[currentIndex];
+                        heroText.style.opacity = 1;
+                    }, 500);
+                }, 4000);
+            }
+        }
+        // Función para validar formulario de contacto
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Validación de campos
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    if (name && email && subject && message) {
+                        // Simular envío exitoso
+                        showCustomAlert('¡Mensaje enviado correctamente! Te contactaremos pronto.', 'success');
+                        contactForm.reset();
+                        // Aquí iría la lógica real de envío del formulario
+                        // Por ejemplo: fetch('/send-email', { method: 'POST', body: new FormData(contactForm) })
+                    } else {
+                        showCustomAlert('Por favor, completa todos los campos del formulario.', 'warning');
+                    }
+                });
+            }
+        }
+        // Función para mostrar formulario de contacto
+        function showContactForm() {
+            const form = document.getElementById('contactForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+        // Función para inicializar galería de imágenes
+        function initImageGallery() {
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            galleryImages.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    // Crear modal para vista ampliada
+                    const modalHtml = `
+                        <div class="modal fade" id="imageModal${index}" tabindex="-1">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Vista ampliada</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img src="${this.src}" class="img-fluid" alt="${this.alt}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    // Agregar modal al DOM si no existe
+                    if (!document.getElementById(`imageModal${index}`)) {
+                        document.body.insertAdjacentHTML('beforeend', modalHtml);
+                    }
+                    // Mostrar modal
+                    const imageModal = new bootstrap.Modal(document.getElementById(`imageModal${index}`));
+                    imageModal.show();
+                });
+            });
+        }
+        // Función para efectos de parallax
+        function initParallaxEffect() {
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.parallax');
+                parallaxElements.forEach(element => {
+                    const speed = element.dataset.speed || 0.5;
+                    element.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+        }
+        // Mejora: Función para cambiar ubicación del mapa
+        function changeMapLocation(coords) {
+            const mapIframe = document.querySelector('.map-container iframe');
+            const [lat, lng] = coords.split(',');
+            mapIframe.src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2z${lat}!5e0!3m2!1ses!2ses!4v1698765432100!5m2!1ses!2ses`;
+        }
+        // Mejora: Función para abrir imagen en modal
+        function openModalImage(src) {
+            const zoomedImage = document.getElementById('zoomedImage');
+            zoomedImage.src = src;
+            const imageZoomModal = new bootstrap.Modal(document.getElementById('imageZoomModal'));
+            imageZoomModal.show();
+        }
+        // Función principal de inicialización
+        function init() {
+            // Cargar preferencia de modo oscuro
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (savedDarkMode) {
+                document.body.classList.add('dark-mode');
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                if (darkModeToggle) {
+                    const darkModeIcon = darkModeToggle.querySelector('i');
+                    darkModeIcon.classList.remove('bi-moon');
+                    darkModeIcon.classList.add('bi-sun');
+                }
+            }
+            // Asignar evento al botón de modo oscuro
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+            }
+            // Inicializar todas las funcionalidades
+            initBackToTop();
+            initSmoothScroll();
+            initCardHoverEffects();
+            initButtonHoverEffects();
+            initCarousel();
+            initVisitCounter();
+            initDynamicHeroText();
+            initContactForm();
+            initImageGallery();
+            initParallaxEffect();
+            // Mostrar alerta de bienvenida
+            setTimeout(() => {
+                showCustomAlert('¡Bienvenido a Urbex Explorers! Descubre lugares abandonados y su historia.', 'info');
+            }, 1000);
+            // Efectos especiales para elementos con clase 'pulse'
+            const pulseElements = document.querySelectorAll('.pulse');
+            pulseElements.forEach(element => {
+                element.style.animation = 'pulse 2s infinite';
+            });
+        }
+        // Ejecutar cuando el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', init);
+        // Añadir estilos CSS para animaciones adicionales
+        const additionalStyles = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            .gallery-image {
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+            .gallery-image:hover {
+                transform: scale(1.05);
+            }
+            .parallax {
+                transition: transform 0.1s ease;
+            }
+            /* Efectos para botones sociales */
+            .social-icons a {
+                transition: all 0.3s ease !important;
+            }
+            .social-icons a:hover {
+                transform: translateY(-5px) scale(1.1) !important;
+            }
+            /* Efectos para enlaces del footer */
+            .footer-links a {
+                position: relative;
+                transition: all 0.3s ease;
+            }
+            .footer-links a::before {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: var(--accent-color);
+                transition: width 0.3s ease;
+            }
+            .footer-links a:hover::before {
+                width: 100%;
+            }
+        `;
+        // Injectar estilos adicionales
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalStyles;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
